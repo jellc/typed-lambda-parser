@@ -66,4 +66,4 @@ syntax に沿わない引数を指定された場合のエラー報告につい�
 
 ## Author
 
-[jellc](https://github.com/jellc)
+[Hirota Kinoshita](https://github.com/jellc)
