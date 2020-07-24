@@ -28,21 +28,21 @@ $ ./type env expr
 
 ### example 1
 
-```cmd
+```bash
 $ ./type "(%x:int->int.%y:int.(x y) %z:int.z)"
 int->int
 ```
 
 ### example 2
 
-```cmd
+```bash
 $ ./type "+:int->int->int 1:int" "%x:int.((+ x) 1)"
 int->int
 ```
 
 ### example 3
 
-```cmd
+```bash
 $ ./type "%x:int.(x x)"
 parse failed.
 problem: applying type doesn't match.
