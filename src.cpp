@@ -1,20 +1,22 @@
 #include <deque>
-#include <fstream>
 #include <iostream>
 #include <unordered_map>
-using namespace std;
+using std::string;
 
+// instead of 'λ'.
 const char lambda='%';
 
-void myassert(bool pred, const string &prob="")
+// error handling.
+void myassert(bool pred, const char prob[]="")
 {
     if(pred) return;
-    if(prob!="") cerr<<"parse failed\nproblem: "<<prob<<"\n";
-    else cerr<<"parse failed.\n";
+    std::cerr<<"parse failed.\n";
+    if(prob!="") std::cerr<<"problem: "<<prob<<"\n";
     exit(1);
 }
 
-struct judged_type : deque<char>
+
+struct judged_type : std::deque<char>
 {
     bool ismap=false;
 
@@ -72,9 +74,9 @@ struct judged_type : deque<char>
         push_back(c);
     }
 
-    friend ostream &operator<<(ostream& os, judged_type jty)
+    friend std::ostream &operator<<(std::ostream& os, judged_type jty)
     {
-        string str;
+        std::string str;
         while(!jty.empty())
         {
             str+=jty.front();
@@ -92,9 +94,10 @@ struct judged_type : deque<char>
         }
         return os<<str;
     }
-};
+}; // struct judged_type
 
-unordered_map<string, judged_type> type_of;
+
+std::unordered_map<string, judged_type> type_of;
 
 bool normal(char chr)
 {
@@ -105,6 +108,7 @@ bool normal(char chr)
 
 void skip_space(char *&ptr) { while(*ptr==' ') ++ptr; }
 
+
 judged_type parse(char *&ptr)
 {
     skip_space(ptr);
@@ -113,8 +117,7 @@ judged_type parse(char *&ptr)
     {
         ++ptr;
         auto lhs=parse(ptr);
-        auto rhs=parse(ptr);
-        lhs.apply(rhs);
+        lhs.apply(parse(ptr));
 
         skip_space(ptr);
         myassert(*ptr==')');
@@ -137,7 +140,7 @@ judged_type parse(char *&ptr)
         myassert(!type_of.count(var),"multiple definition of variable.");
 
         skip_space(ptr);
-        myassert(*ptr==':');
+        myassert(*ptr==':',"missing a \':\' in declaration.");
         ++ptr;
 
         skip_space(ptr);
@@ -149,7 +152,7 @@ judged_type parse(char *&ptr)
         }
 
         skip_space(ptr);
-        myassert(*ptr=='.');
+        myassert(*ptr=='.',"missing a \'.\' in declaration.");
         ++ptr;
 
         lhs.mapto(parse(ptr));
@@ -169,9 +172,10 @@ judged_type parse(char *&ptr)
     }
 
     return judged_type();
-}
+} // judged_type parse(char*&)
 
-main(int argc, char *args[])
+
+signed main(int argc, char *args[])
 {
     char *ptr=args[1];
 
@@ -203,5 +207,5 @@ main(int argc, char *args[])
         ptr=args[2];
     }
 
-    cout<<parse(ptr)<<"\n";
+    std::cout<<parse(ptr)<<"\n";
 }
