@@ -22,7 +22,7 @@
 
 ## Usage
 
-まずsrc.cpp をコンパイルし、実行ファイルを生成する(ここではファイル名を type とする)。
+まず src.cpp をコンパイルし、実行ファイル(以下では 'type')を生成する。
 
 ```bash
 g++ src.cpp -o type
