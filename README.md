@@ -23,7 +23,7 @@
 
 ## Usage
 
-まず src.cpp をコンパイルし、実行ファイル(以下では 'type')を生成する。
+まず [src.cpp](https://github.com/jellc/typed-lambda-parser/blob/master/src.cpp) をコンパイルし、実行ファイル(以下では 'type')を生成する。
 
 ```bash
 g++ src.cpp -o type
