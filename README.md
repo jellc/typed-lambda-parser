@@ -12,7 +12,7 @@
 
 - \<expression> ::= \<alphabets> | '%' + \<alphabets> + ':' + \<type> + '.' + \<expression> | '(' + \<expression> \<expression> + ')'
 
-- \<type> ::= \<alphabets> | '(' + \<type> + ')' | \<type> + '->' + \<type>
+- \<type> ::= \<alphabets> | \<type> + '->' + \<alphabets> | '(' + \<type> + ')' + '->' + \<alphabets>
 
 アルファベットからなる任意の空でない文字列を primitive 型、あるいは変数名とみなすことに注意されたい。また実装の都合上、関数定義で通例用いられる 'λ' は 1 byte 文字である '%' で代用しており、また定数項は型環境に含まれるものとしている。
 
