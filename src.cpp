@@ -177,6 +177,12 @@ judged_type parse(char *&ptr)
 
 signed main(int argc, char *args[])
 {
+    if(argc==1)
+    {
+        std::cerr<<"args empty.\n";
+        return 0;
+    }
+
     char *ptr=args[1];
 
     if(argc>2)
