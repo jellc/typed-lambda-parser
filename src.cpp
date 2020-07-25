@@ -15,7 +15,7 @@ void myassert(bool pred, const char prob[]="")
     exit(1);
 }
 
-// type of lambda calculus
+// type of lambda calculus.
 struct judged_type : std::deque<char>
 {
     bool ismap=false;
@@ -74,6 +74,7 @@ struct judged_type : std::deque<char>
         push_back(c);
     }
 
+    // for result output.
     friend std::ostream &operator<<(std::ostream& os, judged_type jty)
     {
         std::string str;
@@ -120,7 +121,7 @@ judged_type parse(char *&ptr)
         lhs.apply(parse(ptr));
 
         skip_space(ptr);
-        myassert(*ptr==')');
+        myassert(*ptr==')',"bracket not closed.");
         ++ptr;
 
         return lhs;
@@ -199,7 +200,7 @@ signed main(int argc, char *args[])
             }
             myassert(!type_of.count(var),"multiple definition of variable.");
             skip_space(ptr);
-            myassert(*ptr==':');
+            myassert(*ptr==':',"syntax error in env.");
             ++ptr;
             skip_space(ptr);
             judged_type &ty=type_of[var];
