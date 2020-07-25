@@ -15,7 +15,7 @@ void myassert(bool pred, const char prob[]="")
     exit(1);
 }
 
-
+// type of lambda calculus
 struct judged_type : std::deque<char>
 {
     bool ismap=false;
@@ -144,12 +144,13 @@ judged_type parse(char *&ptr)
         ++ptr;
 
         skip_space(ptr);
-        judged_type &lhs=type_of[var];
+        judged_type lhs;
         while(normal(*ptr) or *ptr=='(' or *ptr==')')
         {
             if(*ptr!=' ') lhs.append(*ptr);
             ++ptr;
         }
+        type_of[var]=lhs;
 
         skip_space(ptr);
         myassert(*ptr=='.',"missing a \'.\' in declaration.");
